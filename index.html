@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#245c45">
+  <title>Deep Collections | E-Commerce Shopping Cart</title>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Deep Collections home">
+      <span class="brand-icon">DC</span>
+      <span>Deep Collections</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#products">Shop</a>
+      <a href="#cart-section">My cart <span id="cart-count" class="cart-count">0</span></a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">YOUR EVERYDAY MARKETPLACE</p>
+        <h1>Good finds.<br><span>Great prices.</span></h1>
+        <p>Discover useful things for your everyday life.</p>
+        <a class="button button-light" href="#products">Explore products <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="hero-art" aria-label="A selection of shopping products">
+        <div class="hero-image-frame">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=85" alt="Modern retail store with products">
+        </div>
+        <div class="hero-tag"><span class="hero-tag-dot"></span>Find your next favourite</div>
+      </div>
+    </section>
+
+    <section id="products" class="section-block">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">THE COLLECTION</p>
+          <h2>Shop our products</h2>
+          <p class="muted">Find something you’ll love.</p>
+        </div>
+        <span id="product-count" class="result-count">12 products available</span>
+      </div>
+      <div class="toolbar">
+        <label class="search-box">
+          <span class="search-icon" aria-hidden="true"></span>
+          <input id="search-input" type="search" placeholder="Search products..." autocomplete="off">
+        </label>
+        <label class="select-wrap">
+          <span class="sr-only">Filter by category</span>
+          <select id="category-filter">
+            <option value="all">All categories</option>
+          </select>
+        </label>
+        <label class="select-wrap">
+          <span class="sr-only">Sort products</span>
+          <select id="sort-select">
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: low to high</option>
+            <option value="price-high">Price: high to low</option>
+            <option value="name">Name: A to Z</option>
+          </select>
+        </label>
+      </div>
+      <div id="product-grid" class="product-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="cart-section" class="cart-section section-block">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">READY WHEN YOU ARE</p>
+          <h2>Your shopping cart</h2>
+          <p class="muted">Review your items before checkout.</p>
+        </div>
+        <span class="cart-heading-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 10.1a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6M10 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm7 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/></svg>
+        </span>
+      </div>
+      <div class="cart-layout">
+        <div class="cart-panel">
+          <div class="panel-heading">
+            <h3>Cart items</h3>
+            <span id="cart-item-label" class="muted">0 items</span>
+          </div>
+          <div id="cart-items"></div>
+        </div>
+        <aside class="summary-panel">
+          <h3>Order summary</h3>
+          <div class="coupon-area">
+            <label for="coupon-input">Discount code</label>
+            <div class="coupon-row">
+              <input id="coupon-input" type="text" placeholder="e.g. SAVE10" maxlength="20" autocomplete="off">
+              <button id="apply-coupon" class="button button-outline" type="button">Apply</button>
+            </div>
+            <p class="coupon-hint">Try SAVE10 for 10% off or SAVE20 for 20% off.</p>
+            <p id="coupon-message" class="coupon-message" aria-live="polite"></p>
+          </div>
+          <div class="summary-lines">
+            <div><span>Subtotal</span><strong id="subtotal">₹0.00</strong></div>
+            <div><span>Discount</span><strong id="discount" class="discount-value">− ₹0.00</strong></div>
+            <div class="total-line"><span>Total</span><strong id="total">₹0.00</strong></div>
+          </div>
+          <button id="checkout-button" class="button button-primary button-full" type="button" disabled>Continue to checkout <span aria-hidden="true">→</span></button>
+          <p class="secure-note"><span class="lock-icon" aria-hidden="true"></span> Demo checkout · no payment is taken</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand footer-brand" href="#top">
+      <span class="brand-icon">D</span>
+      <span>Deep Collections</span>
+    </a>
+    <p>Student project · Built with HTML, CSS and JavaScript · Cart saved in your browser</p>
+  </footer>
+
+  <div id="checkout-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card">
+      <button id="close-modal" class="modal-close" type="button" aria-label="Close checkout">×</button>
+      <div class="success-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+      </div>
+      <p class="eyebrow">ORDER REVIEW</p>
+      <h2 id="checkout-title">You’re almost there!</h2>
+      <p id="checkout-message" class="muted">Here is your checkout summary.</p>
+      <div id="checkout-details" class="checkout-details"></div>
+      <button id="done-button" class="button button-primary button-full" type="button">Done</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
